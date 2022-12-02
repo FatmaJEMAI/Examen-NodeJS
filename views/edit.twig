@@ -1,0 +1,21 @@
+{% extends "layout.twig" %}
+ {% block body %}
+ <form method="post" action="http://localhost:3000/etudiant/edit/{{etud._id}}">
+    nom:
+    <input type="text " name="nom" value={{etud.nom}} placeholder=" nom"/><br/>
+    age:
+    <input type="numbre"name="age"value={{etud.age}}/><br/>
+
+    email:
+    <input type="email"name="email"value={{etud.email}}/><br/>
+
+    moyenne:
+    <input type="text"name="moyenne"value={{etud.moyenne}}/><br/>
+
+    mention:
+    <input type="text"name="mention"value={{etud.mention}}/><br/>
+
+
+    <button type="submit">add new etudiant</button>
+</form>
+ {% endblock %}

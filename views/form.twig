@@ -1,0 +1,107 @@
+<input type ="text"  placeholder =recherche .. onkeyup="search(this)"/>
+{% block body %}
+<table border="2">
+   <tr>
+
+<th> nom </th>
+<th> age</th>
+<th> email</th>
+<th> moyenne</th>
+<th> mention</th>
+
+</tr>
+
+    {% for etudiant in etud %}
+    <tr>
+        <td> {{etudiant.nom}}</td>
+        <td> {{etudiant.age}}</td>
+        <td> {{etudiant.email}}</td>
+        <td> {{etudiant.moyenne}}</td>
+        <td> {{etudiant.mention}}</td>
+
+        <td>
+           <a href="http://localhost:3000/etudiant/edit/{{etudiant._id}}"><button>Edit</button></a>
+           <a href="http://localhost:3000/etudiant/delete/{{etudiant._id}}"><button>Delete</button></a>
+        </td>
+    </tr>
+    {% endfor %}
+
+
+</table>
+<h2> ajouter un etudiant</h2>
+<form method="post" action="http://localhost:3000/etudiant">
+    nom:
+    <input type="text " name="nom" placeholder="  nom"/><br/>
+    age:
+    <input type="numbre"name="age"placeholder=" age"/><br/>
+    email:
+    <input type="email" name="email"/><br/>
+    moyenne:
+    <input type="text" name="moyenne"/><br/>
+
+    mention:
+   
+    <input type="text" name="mention"/><br/>
+
+    <button type="submit">add new etudiant</button>
+</form>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+        async function search(e) {
+
+etud data = await fetch('http://localhost:3000/etudiant/search?search=' + e.value);
+etud {etudiant} = await data.json();
+if (etudiant.length > 0) {
+etud tbody = document.querySelector('tbody');
+tbody.innerHTML = '';
+etudiant.forEach(etudiant => {
+tbody.innerHTML += `<tr>
+<td>${
+etudiant.nom
+}</td>
+<td>${
+etudiant.age
+}</td>
+<td>${
+etudiant.email
+}</td>
+<td>
+
+<td>${
+etudiant.moyenne
+}</td>
+<td>
+
+
+<td>${
+etudiant.mention
+}</td>
+<td>
+
+
+
+
+<a href="http://localhost:3000/etudiant/edit/${
+etudiant._id
+}">
+<button>Edit</button>
+</a>
+<a href="http://localhost:3000/etudiant/delete/${
+etudiant._id
+}">
+<button>Delete</button>
+</a>
+</td>
+</tr>`;
+});
+}
+}
+    </script>
+{% endblock %}
